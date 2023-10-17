@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -e
+
+docker compose build
+
+bundle install
+rails db:prepare
