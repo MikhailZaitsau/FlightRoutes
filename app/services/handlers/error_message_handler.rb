@@ -2,9 +2,8 @@
 
 module Handlers
   class ErrorMessageHandler < Core::Service
-    def call(error_message = nil, status = :bad_request)
-      render json: { route: nil, status: 'FAIL', distance: 0, error_message: },
-             status:
+    def call(error_message = 'nil')
+      { route: nil, status: 'FAIL', distance: 0, error_message: }.to_json
     end
   end
 end

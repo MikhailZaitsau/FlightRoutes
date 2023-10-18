@@ -1,19 +1,21 @@
 # frozen_string_literal: true
 
-module Tokens
+require 'httparty'
+module Authorization
   class HeaderToken < Core::Service
-    include 'httparty'
     def call
-      result = yield token
+      encripted_header
+      result = token
       result.is_a?(String) ? "Bearer #{result}" : result
     end
 
     private
 
-    client_id = ENV.fetch('AMADEUS_CLIENT_ID', nil)
-    client_secret = ENV.fetch('AMADEUS_CLIENT_SECRET', nil)
-
-    @auth_header = "Basic #{Base64.strict_encode64("#{client_id}:#{client_secret}")}"
+    def encripted_header
+      client_id = ENV.fetch('AMADEUS_CLIENT_ID', nil)
+      client_secret = ENV.fetch('AMADEUS_CLIENT_SECRET', nil)
+      @auth_header = "Basic #{Base64.strict_encode64("#{client_id}:#{client_secret}")}"
+    end
 
     def token
       return @access_token if @access_token && !needs_refresh?
@@ -28,14 +30,14 @@ module Tokens
 
     def update_access_token
       response = fetch_access_token
-      store_access_token(response.result)
+      store_access_token(response)
     end
 
     def fetch_access_token
       if auth_request.code == 200 && auth_request.parsed_response.length.positive?
         auth_request
       else
-        { route: nil, status: 'FAIL', distance: 0, error_message: 'Authorization error' }
+        Handlers::ErrorMessageHandler.new.call('Authorization error')
       end
     end
 
@@ -47,9 +49,9 @@ module Tokens
       )
     end
 
-    def store_access_token(data)
-      @access_token = data['access_token']
-      @expires_at = Time.current + data['expires_in']
+    def store_access_token(response)
+      @access_token = response['access_token']
+      @expires_at = Time.current + response['expires_in']
     end
   end
 end
