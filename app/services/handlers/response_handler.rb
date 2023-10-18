@@ -30,20 +30,32 @@ module Handlers
     def few_legs(flight_data:)
       @flight_data = flight_data
       route = []
-      @flight_data[0]['legs'].each { route << one_leg(leg:).expect(:status, :error_message) }
+      @flight_data[0]['legs'].each { |leg| route << one_leg(leg:).except(:status, :error_message) }
       generate_hash(route:)
     end
 
     def generate_hash(route:)
       @route = route
       @airports_coordinates = if @route.is_a?(Hash)
-                                [@route[:departure][:latitude], @route[:departure][:longitude],
-                                @route[:arrival][:latitude], @route[:arrival][:longitude]]
+                                single_leg_coordinates
                               else
-                                [@route[0][:departure][:latitude], @route[0][:departure][:longitude],
-                                @route[-1][:arrival][:latitude], @route[-1][:arrival][:longitude]]
+                                multi_legs_coordinates
                               end
       { route: @route, status: 'OK', distance: calculate_distance(@airports_coordinates), error_message: nil }
+    end
+
+    def single_leg_coordinates
+      [@route.dig(:departure, :latitude),
+       @route.dig(:departure, :longitude),
+       @route.dig(:departure, :latitude),
+       @route.dig(:departure, :longitude)]
+    end
+
+    def multi_legs_coordinates
+      [@route.dig(0, :route, :departure, :latitude),
+       @route.dig(0, :route, :departure, :longitude),
+       @route.dig(-1, :route, :departure, :latitude),
+       @route.dig(-1, :route, :departure, :longitude)]
     end
 
     def fetch_airports_data(airport_iata_code)
