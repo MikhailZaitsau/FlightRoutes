@@ -2,5 +2,5 @@
 
 set -e
 
-command="docker compose run --rm myapp /bin/bash -c 'bundle exec rails ${@}'"
+command="docker compose run --rm rails /bin/bash -c 'bin/rails ${@}'"
 eval $command

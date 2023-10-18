@@ -5,4 +5,4 @@ set -e
 docker compose build
 
 bundle install
-rails db:prepare
+docker compose run --rm rails /bin/bash -c 'bin/rails db:prepare'

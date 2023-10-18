@@ -2,5 +2,5 @@
 
 set -e
 
-command="docker compose run --rm myapp /bin/bash -c 'bundle exec rspec ${@}'"
+command="docker compose run --rm rails /bin/bash -c 'bin/rspec ${@}'"
 eval $command
