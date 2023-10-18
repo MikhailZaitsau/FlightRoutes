@@ -8,12 +8,12 @@ RSpec.describe 'FlightRoutesController' do
     # let(:params) { { flightnumber: } }
 
     it 'return status OK' do
-      get "/flightroutes/#{flightnumber}"
+      get "/flight_routes?flight_number=#{flightnumber}"
       expect(response).to have_http_status(:ok)
     end
 
     it 'return JSON format' do
-      get "/flightroutes/#{flightnumber}"
+      get "/flight_routes?flight_number=#{flightnumber}"
       expect(response.content_type).to eq('application/json')
     end
   end
