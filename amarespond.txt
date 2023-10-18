@@ -1,0 +1,58 @@
+{
+  "meta" : {
+    "count" : 1,
+    "links" : {
+      "self" : "https://test.api.amadeus.com/v2/schedule/flights?carrierCode=BA&flightNumber=319&scheduledDepartureDate=2023-10-17"
+    }
+  },
+  "data" : [ {
+    "type" : "DatedFlight",
+    "scheduledDepartureDate" : "2023-10-17",
+    "flightDesignator" : {
+      "carrierCode" : "BA",
+      "flightNumber" : 319
+    },
+    "flightPoints" : [ {
+      "iataCode" : "CDG",
+      "departure" : {
+        "terminal" : {
+          "code" : "2D"
+        },
+        "timings" : [ {
+          "qualifier" : "STD",
+          "value" : "2023-10-17T16:30+02:00"
+        } ]
+      }
+    }, {
+      "iataCode" : "LHR",
+      "arrival" : {
+        "terminal" : {
+          "code" : "5"
+        },
+        "timings" : [ {
+          "qualifier" : "STA",
+          "value" : "2023-10-17T16:45+01:00"
+        } ]
+      }
+    } ],
+    "segments" : [ {
+      "boardPointIataCode" : "CDG",
+      "offPointIataCode" : "LHR",
+      "scheduledSegmentDuration" : "PT1H15M",
+      "partnership" : {
+        "operatingFlight" : {
+          "carrierCode" : "MH",
+          "flightNumber" : 9671
+        }
+      }
+    } ],
+    "legs" : [ {
+      "boardPointIataCode" : "CDG",
+      "offPointIataCode" : "LHR",
+      "aircraftEquipment" : {
+        "aircraftType" : "320"
+      },
+      "scheduledLegDuration" : "PT1H15M"
+    } ]
+  } ]
+}
