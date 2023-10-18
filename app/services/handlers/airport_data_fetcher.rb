@@ -8,30 +8,31 @@ module Handlers
       return Failure(@token_header) unless @token_header.is_a?(String)
 
       @airport_response = fetch_response
-      if @airport_response.is_a?(HTTParty::Response)
+      # if @airport_response.is_a?(HTTParty::Response)
         generate_hash
-      else
-        @airport_response
-      end
+      # else
+        # @airport_response
+      # end
     end
     private
 
     def fetch_response
-      if airport_query.code == 200 && airport_query.parsed_response.length.positive?
+      # if airport_query.code == 200 && airport_query.parsed_response.length.positive?
         airport_query
-      else
-        Handlers::ErrorMessageHandler.new.call('Airport not found')
-      end
+      # else
+      #   Handlers::ErrorMessageHandler.new.call('Airport not found')
+      # end
     end
 
     def airport_query
-      HTTParty.get(
-        'https://test.api.amadeus.com/v1/reference-data/locations',
-        headers: { 'Authorization' => token_header },
-        query: {
-          subType: 'AIRPORT', keyword: @airport_iata_code
-        }
-      )
+      File.read("air#{@airport_iata_code}.txt")
+      # HTTParty.get(
+      #   'https://test.api.amadeus.com/v1/reference-data/locations',
+      #   headers: { 'Authorization' => token_header },
+      #   query: {
+      #     subType: 'AIRPORT', keyword: @airport_iata_code
+      #   }
+      # )
     end
 
     def airport_data

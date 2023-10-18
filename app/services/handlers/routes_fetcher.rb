@@ -8,11 +8,11 @@ module Handlers
       return Failure(@token_header) unless @token_header.is_a?(String)
 
       @route_response = fetch_response
-      if @route_response.is_a?(HTTParty::Response)
+      # if @route_response.is_a?(HTTParty::Response)
         Handlers::ResponseHandler.new.call(@route_response)
-      else
-        @route_response
-      end
+      # else
+        # @route_response
+      # end
     end
 
     private
@@ -31,23 +31,24 @@ module Handlers
 
     def fetch_response
       @normalized_flight_number[0, 3] =~ /\d/ ? iata : icao
-      if route_query.code == 200 && route_query.parsed_response.length.positive?
+      # if route_query.code == 200 && route_query.parsed_response.length.positive?
         route_query
-      else
-        Handlers::ErrorMessageHandler.new.call('Flight number not found')
-      end
+      # else
+      #   Handlers::ErrorMessageHandler.new.call('Flight number not found')
+      # end
     end
 
     def route_query
-      HTTParty.get(
-        'https://test.api.amadeus.com/v2/schedule/flights',
-        headers: { 'Authorization' => @token_header },
-        query: {
-          carrierCode: @carrier_code,
-          flightNumber: @flight_number,
-          scheduledDepartureDate: Time.zone.today.strftime('%Y-%m-%d')
-        }
-      )
+      File.read("amarespond.txt")
+      # HTTParty.get(
+      #   'https://test.api.amadeus.com/v2/schedule/flights',
+      #   headers: { 'Authorization' => @token_header },
+      #   query: {
+      #     carrierCode: @carrier_code,
+      #     flightNumber: @flight_number,
+      #     scheduledDepartureDate: Time.zone.today.strftime('%Y-%m-%d')
+      #   }
+      # )
     end
   end
 end
