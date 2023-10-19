@@ -10,8 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 0) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_19_002651) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "airports", force: :cascade do |t|
+    t.string "iata"
+    t.string "city"
+    t.string "country"
+    t.float "latitude"
+    t.float "longitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "flight_numbers", force: :cascade do |t|
+    t.string "flight_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "legs", force: :cascade do |t|
+    t.string "departure"
+    t.string "arrival"
+    t.integer "distance"
+    t.bigint "flight_number_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["flight_number_id"], name: "index_legs_on_flight_number_id"
+  end
+
+  add_foreign_key "legs", "flight_numbers"
 end
