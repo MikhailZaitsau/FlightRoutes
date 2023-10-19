@@ -6,6 +6,7 @@ module Handlers
       @airports_coordinates = airports_coordinates
       haversine_distance(*@airports_coordinates)
     end
+
     private
 
     EARTH_RADIUS = 6371
@@ -30,7 +31,7 @@ module Handlers
 
       d = arc_hav(hav(arrival_latitude_in_radians - departure_latitude_in_radians) + (Math.cos(departure_latitude_in_radians) * Math.cos(arrival_latitude_in_radians) * hav(arrival_longitude_in_radians - departure_longitude_in_radians)))
 
-      d * EARTH_RADIUS
+      (d * EARTH_RADIUS).round
     end
   end
 end

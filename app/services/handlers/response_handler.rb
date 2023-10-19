@@ -47,15 +47,15 @@ module Handlers
     def single_leg_coordinates
       [@route.dig(:departure, :latitude),
        @route.dig(:departure, :longitude),
-       @route.dig(:departure, :latitude),
-       @route.dig(:departure, :longitude)]
+       @route.dig(:arrival, :latitude),
+       @route.dig(:arrival, :longitude)]
     end
 
     def multi_legs_coordinates
       [@route.dig(0, :route, :departure, :latitude),
        @route.dig(0, :route, :departure, :longitude),
-       @route.dig(-1, :route, :departure, :latitude),
-       @route.dig(-1, :route, :departure, :longitude)]
+       @route.dig(-1, :route, :arrival, :latitude),
+       @route.dig(-1, :route, :arrival, :longitude)]
     end
 
     def fetch_airports_data(airport_iata_code)

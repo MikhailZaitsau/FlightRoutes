@@ -53,6 +53,20 @@
         "aircraftType" : "320"
       },
       "scheduledLegDuration" : "PT1H15M"
+    }, {
+      "boardPointIataCode" : "CDG",
+      "offPointIataCode" : "LHR",
+      "aircraftEquipment" : {
+        "aircraftType" : "320"
+      },
+      "scheduledLegDuration" : "PT1H15M"
+    }, {
+      "boardPointIataCode" : "CDG",
+      "offPointIataCode" : "LHR",
+      "aircraftEquipment" : {
+        "aircraftType" : "320"
+      },
+      "scheduledLegDuration" : "PT1H15M"
     } ]
   } ]
 }
