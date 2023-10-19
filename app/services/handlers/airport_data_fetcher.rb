@@ -9,12 +9,14 @@ module Handlers
 
       @airport_response = fetch_response
       # if @airport_response.is_a?(HTTParty::Response)
-        generate_hash
+        generate_hash(airport_data)
       # else
         # @airport_response
       # end
     end
     private
+
+    attr_reader :airport_data
 
     def fetch_response
       # if airport_query.code == 200 && airport_query.parsed_response.length.positive?
@@ -36,17 +38,11 @@ module Handlers
     end
 
     def airport_data
-      @airport_data ||= JSON.parse(@airport_response)['data'][0]
+      airport_data ||= JSON.parse(@airport_response)['data'][0]
     end
 
-    def generate_hash
-      {
-        iata: airport_data['iataCode'],
-        city: airport_data.dig('address', 'cityName'),
-        country: airport_data.dig('address', 'countryName'),
-        latitude: airport_data.dig('geoCode', 'latitude'),
-        longitude: airport_data.dig('geoCode', 'longitude')
-      }
+    def generate_hash(airport_data)
+      Handlers::HashGenerator.new.call(airport_data)
     end
   end
 end
