@@ -3,6 +3,6 @@ FactoryBot.define do
     departure { 'CDG' }
     arrival { 'LHR' }
     distance { 348 }
-    :flight_number
+    flight_number_id { create(:flight_number)}
   end
 end

@@ -4,6 +4,8 @@ module Handlers
   class RoutesFetcher < Core::Service
     def call(normalized_flight_number)
       @normalized_flight_number = normalized_flight_number.join
+      return flight_route_from_db if flight_route_from_db
+
       @token_header = Authorization::HeaderToken.new.call
       return Failure(@token_header) unless @token_header.is_a?(String)
 
@@ -19,18 +21,18 @@ module Handlers
 
     attr_reader :carrier_code, :flight_number
 
-    def iata
+    def iata_format
       @carrier_code = @normalized_flight_number[0, 2]
       @flight_number = @normalized_flight_number[2, 4]
     end
 
-    def icao
+    def icao_format
       @carrier_code = @normalized_flight_number[0, 3]
       @flight_number = @normalized_flight_number[3, 4]
     end
 
     def fetch_response
-      @normalized_flight_number[0, 3] =~ /\d/ ? iata : icao
+      @normalized_flight_number[0, 3] =~ /\d/ ? iata_format : icao_format
       # if route_query.code == 200 && route_query.parsed_response.length.positive?
         route_query
       # else
@@ -49,6 +51,10 @@ module Handlers
       #     scheduledDepartureDate: Time.zone.today.strftime('%Y-%m-%d')
       #   }
       # )
+    end
+
+    def flight_route_from_db
+      Handlers::DatabaseCheker.new.call(@normalized_flight_number)
     end
   end
 end

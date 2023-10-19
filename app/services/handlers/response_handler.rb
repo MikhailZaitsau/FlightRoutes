@@ -24,6 +24,7 @@ module Handlers
       departure = fetch_airports_data(@leg['boardPointIataCode'])
       arrival = fetch_airports_data(@leg['offPointIataCode'])
       route = { departure:, arrival: }
+      legs_creator(route)
       generate_hash(route)
     end
 
@@ -32,6 +33,10 @@ module Handlers
       route = []
       @flight_data[0]['legs'].each { |leg| route << one_leg(leg:).except(:status, :error_message) }
       generate_hash(route)
+    end
+
+    def legs_creator(route)
+      Handlers::LegsCreator.new.call(route)
     end
 
     def generate_hash(route)
