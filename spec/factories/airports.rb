@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :airport do
-    iata { "MyString" }
-    city { "MyString" }
-    country { "MyString" }
-    latitude { 1.5 }
-    longitude { 1.5 }
+    iata { 'LHR' }
+    city { 'LONDON' }
+    country { 'UNITED KINGDOM' }
+    latitude { 51.47750 }
+    longitude { -0.46138 }
   end
 end

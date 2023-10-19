@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :leg do
-    departure { "MyString" }
-    arrival { "MyString" }
-    distance { 1 }
-    flight { nil }
+    departure { 'CDG' }
+    arrival { 'LHR' }
+    distance { 348 }
+    :flight_number
   end
 end
