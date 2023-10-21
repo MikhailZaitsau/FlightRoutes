@@ -25,6 +25,9 @@ module Handlers
     def generate_hash_for_multileg_route_form_db(route_from_db)
       departure = fetch_airports_data(route_from_db[0][:departure])
       arrival = fetch_airports_data(route_from_db[-1][:arrival])
+      return arrival unless arrival[:iata]
+      return departure unless departure[:iata]
+
       distance = calculate_distance(single_leg_coordinates(departure:, arrival:))
       generate_route_hash(route_from_db, distance)
     end

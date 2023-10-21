@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'FlightRoutesController' do
   describe 'GET /index' do
-    let(:flightnumber) { '7C2252' }
+    let(:flightnumber) { 'LH2479' }
 
     it 'return status OK' do
       get "/flight_routes?flight_number=#{flightnumber}"
@@ -31,13 +31,12 @@ RSpec.describe 'FlightRoutesController' do
 
       it 'distance between first department and last arrival are present' do
         get "/flight_routes?flight_number=#{flightnumber}"
-        expect(response.parsed_body['distance']).should_not be_nil
+        expect(response.parsed_body['distance']).not_to be_nil
       end
 
       it 'distance beetwen firsta department and last arrival not zero' do
         get "/flight_routes?flight_number=#{flightnumber}"
         expect(response.parsed_body['distance'].to_i).to be > 0
-
       end
     end
 

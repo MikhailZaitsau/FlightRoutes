@@ -4,6 +4,7 @@ module Handlers
   class DistanceCalculator < Core::Service
     # A service that calculates the distance between two airports based on their coordinates using the haversine formula
     def call(airports_coordinates)
+      Handlers::ErrorMessageHandler.new.call('Wrong coordinates') if airports_coordinates.any?(&:nil?)
       airports_coordinates_in_radians = to_radians(airports_coordinates)
       haversine_distance(*airports_coordinates_in_radians)
     end

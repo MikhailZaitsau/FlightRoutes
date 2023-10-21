@@ -4,10 +4,6 @@ module Handlers
   class ResponseHandler < Core::Service
     def call(route_response)
       @parsed_response = JSON.parse(route_response)
-      if @parsed_response['meta']['count'] < 1
-        return Failure(Handlers::ErrorMessageHandler.new.call('Flight route not found'))
-      end
-
       legs_counter
     end
 
@@ -24,6 +20,9 @@ module Handlers
     def generate_hash_for_each_leg(leg)
       departure = fetch_airports_data(leg['boardPointIataCode'])
       arrival = fetch_airports_data(leg['offPointIataCode'])
+      return arrival unless arrival[:iata]
+      return departure unless departure[:iata]
+
       route = { departure:, arrival: }
       create_leg_in_db(route)
       generate_hash(route)

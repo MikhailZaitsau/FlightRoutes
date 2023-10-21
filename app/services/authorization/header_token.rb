@@ -7,7 +7,7 @@ module Authorization
       encripted_header
       result = token
 
-      result.is_a?(String) ? "Bearer #{result}" : result
+      result.is_a?(String) ? "Bearer #{result}" : Handlers::ErrorMessageHandler.new.call('Authorization error')
     end
 
     private
@@ -20,7 +20,7 @@ module Authorization
 
     def token
       @access_token = AuthToken.last
-      return @access_token if @access_token && !needs_refresh?
+      return @access_token.token if @access_token && !needs_refresh?
 
       update_access_token
       @access_token

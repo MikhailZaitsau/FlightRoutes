@@ -60,13 +60,13 @@ module Handlers
     end
 
     def check_lookup_status
-      @lookup_result.is_a?(Hash) ? 'OK' : 'FAIL'
+      @lookup_result.is_a?(Hash) && @lookup_result[:route] ? 'OK' : 'FAIL'
     end
 
     def check_number_of_legs
       if @lookup_result.is_a?(Hash) && @lookup_result[:route].is_a?(Array)
         @lookup_result[:route].count
-      elsif @lookup_result.is_a?(Hash)
+      elsif @lookup_result.is_a?(Hash) && @lookup_result[:route]
         1
       end
     end
