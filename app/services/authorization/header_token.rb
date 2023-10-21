@@ -6,6 +6,7 @@ module Authorization
     def call
       encripted_header
       result = token
+
       result.is_a?(String) ? "Bearer #{result}" : result
     end
 
@@ -18,6 +19,7 @@ module Authorization
     end
 
     def token
+      @access_token = AuthToken.last
       return @access_token if @access_token && !needs_refresh?
 
       update_access_token
@@ -25,10 +27,11 @@ module Authorization
     end
 
     def needs_refresh?
-      @access_token.nil? || (Time.current + 10) > @expires_at
+      @access_token.nil? || (Time.current + 10) > @access_token.expires_at
     end
 
     def update_access_token
+      @access_token&.destroy
       response = fetch_access_token
       store_access_token(response)
     end
@@ -51,7 +54,8 @@ module Authorization
 
     def store_access_token(response)
       @access_token = response['access_token']
-      @expires_at = Time.current + response['expires_in']
+      expires_at = Time.current + response['expires_in']
+      AuthToken.create(token: @access_token, expires_at:)
     end
   end
 end

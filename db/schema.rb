@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_19_115710) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_21_131459) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,6 +23,13 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_19_115710) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["iata"], name: "index_airports_on_iata", unique: true
+  end
+
+  create_table "auth_tokens", force: :cascade do |t|
+    t.string "token"
+    t.datetime "expires_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "flight_numbers", force: :cascade do |t|
