@@ -16,20 +16,28 @@ module Handlers
     private
 
     def fetch_flight_number_from_db
-      flight_number = FlightNumber.includes(:legs).find_by(flight_number: @query_data)
-      if !flight_number
-        FlightNumber.create(flight_number:)
-        false
-      elsif flight_number.updated_at < Time.current - 24.hour
-        flight_number.destroy
-        FlightNumber.create(flight_number:)
-        false
+      @flight_number = FlightNumber.includes(:legs).find_by(flight_number: @query_data)
+      if !@flight_number
+        add_new_flight_number_to_db
+      elsif @flight_number.updated_at < 24.hours.ago
+        destroy_flight_number_and_add_new_to_db
       else
-        parse_legs(flight_number:)
+        parse_legs(@flight_number)
       end
     end
 
-    def parse_legs(flight_number:)
+    def add_new_flight_number_to_db
+      FlightNumber.create(@flight_number)
+      false
+    end
+
+    def destroy_flight_number_and_add_new_to_db
+      flight_number.destroy
+      FlightNumber.create(@flight_number)
+      false
+    end
+
+    def parse_legs(flight_number)
       legs = flight_number.legs.map(&:attributes).map(&:symbolize_keys)
                           .map { |leg| leg.except(:id, :flight_number_id, :created_at, :updated_at) }
       legs.count == 1 ? generate_hash(legs[0]) : generate_hash(legs)
@@ -40,8 +48,8 @@ module Handlers
       airport ? airport.attributes.symbolize_keys.except(:id, :created_at, :updated_at) : false
     end
 
-    def generate_hash(route)
-      Handlers::HashGenerator.new.call(route)
+    def generate_hash(route_from_db)
+      Handlers::HashGenerator.new.call(route_from_db:)
     end
   end
 end

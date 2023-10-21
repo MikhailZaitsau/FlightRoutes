@@ -29,9 +29,15 @@ RSpec.describe 'FlightRoutesController' do
         expect(response.parsed_body['route'][0]['arrival']).to eq(airport.iata)
       end
 
-      it 'distance beetwen firsta department and last arrival not nil' do
+      it 'distance between first department and last arrival are present' do
         get "/flight_routes?flight_number=#{flightnumber}"
         expect(response.parsed_body['distance']).should_not be_nil
+      end
+
+      it 'distance beetwen firsta department and last arrival not zero' do
+        get "/flight_routes?flight_number=#{flightnumber}"
+        expect(response.parsed_body['distance'].to_i).to be > 0
+
       end
     end
 

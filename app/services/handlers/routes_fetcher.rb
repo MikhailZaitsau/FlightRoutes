@@ -3,23 +3,21 @@
 module Handlers
   class RoutesFetcher < Core::Service
     def call(normalized_flight_number)
-      @normalized_flight_number = normalized_flight_number.join
+      @normalized_flight_number = normalized_flight_number
       return flight_route_from_db if flight_route_from_db
 
-      @token_header = Authorization::HeaderToken.new.call
-      return Failure(@token_header) unless @token_header.is_a?(String)
+      # @token_header = Authorization::HeaderToken.new.call
+      # return Failure(@token_header) unless @token_header.is_a?(String)
 
       @route_response = fetch_response
       # if @route_response.is_a?(HTTParty::Response)
-        Handlers::ResponseHandler.new.call(@route_response)
+      Handlers::ResponseHandler.new.call(@route_response)
       # else
-        # @route_response
+      # @route_response
       # end
     end
 
     private
-
-    attr_reader :carrier_code, :flight_number
 
     def iata_format
       @carrier_code = @normalized_flight_number[0, 2]
@@ -34,14 +32,14 @@ module Handlers
     def fetch_response
       @normalized_flight_number[0, 3] =~ /\d/ ? iata_format : icao_format
       # if route_query.code == 200 && route_query.parsed_response.length.positive?
-        route_query
+      route_query
       # else
-      #   Handlers::ErrorMessageHandler.new.call('Flight number not found')
+      #   Handlers::ErrorMessageHandler.new.call('Flight route not found')
       # end
     end
 
     def route_query
-      File.read("amarespond.txt")
+      File.read('routeresponse')
       # HTTParty.get(
       #   'https://test.api.amadeus.com/v2/schedule/flights',
       #   headers: { 'Authorization' => @token_header },

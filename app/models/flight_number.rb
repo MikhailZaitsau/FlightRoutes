@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FlightNumber < ApplicationRecord
   validates :flight_number, presence: true, uniqueness: true, length: { in: 6..7 }
   has_many :legs, dependent: :destroy

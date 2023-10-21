@@ -6,32 +6,31 @@ module Handlers
       @airport_iata_code = airport_iata_code
       return airport_from_db if airport_from_db
 
-      @token_header = Authorization::HeaderToken.new.call
-      return Failure(@token_header) unless @token_header.is_a?(String)
+      # @token_header = Authorization::HeaderToken.new.call
+      # return Failure(@token_header) unless @token_header.is_a?(String)
 
       @airport_response = fetch_response
       # if @airport_response.is_a?(HTTParty::Response)
-        airport = generate_hash(airport_data)
-        Airport.create(airport)
-        airport
+      airport = generate_hash
+      Airport.create(airport)
+      airport
       # else
-        # @airport_response
+      # @airport_response
       # end
     end
-    private
 
-    attr_reader :airport_data
+    private
 
     def fetch_response
       # if airport_query.code == 200 && airport_query.parsed_response.length.positive?
-        airport_query
+      airport_query
       # else
       #   Handlers::ErrorMessageHandler.new.call('Airport not found')
       # end
     end
 
     def airport_query
-      File.read("air#{@airport_iata_code}.txt")
+      File.read("airport#{@airport_iata_code}response")
       # HTTParty.get(
       #   'https://test.api.amadeus.com/v1/reference-data/locations',
       #   headers: { 'Authorization' => token_header },
@@ -42,15 +41,15 @@ module Handlers
     end
 
     def airport_data
-      airport_data ||= JSON.parse(@airport_response)['data'][0]
+      JSON.parse(@airport_response)['data'][0]
     end
 
     def airport_from_db
       Handlers::DatabaseCheker.new.call(@airport_iata_code)
     end
 
-    def generate_hash(airport_data)
-      Handlers::HashGenerator.new.call(airport_data)
+    def generate_hash
+      Handlers::HashGenerator.new.call(airport_data:)
     end
   end
 end
