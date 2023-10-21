@@ -43,5 +43,17 @@ RSpec.describe 'FlightRoutesController' do
         expect(response).to have_http_status(:ok)
       end
     end
+
+    context 'when flight number invalid or not received' do
+      it 'return an error invalid number' do
+        get "/flight_routes?flight_number=''"
+        expect(response.parsed_body['error_message']).to eq('Invalid flight number format')
+      end
+
+      it 'return an error number not received' do
+        get "/flight_routes?flight_number='0942AB'"
+        expect(response.parsed_body['error_message']).to eq('Invalid flight number format')
+      end
+    end
   end
 end
