@@ -83,3 +83,5 @@ group :test do
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 5.0'
 end
+
+gem "vcr", "~> 6.2"
