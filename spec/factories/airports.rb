@@ -2,10 +2,10 @@
 
 FactoryBot.define do
   factory :airport do
-    iata { 'LHR' }
-    city { 'LONDON' }
-    country { 'UNITED KINGDOM' }
-    latitude { 51.47750 }
-    longitude { -0.46138 }
+    iata { Faker::Base.regexify(/^[A-Z]{3}$/) }
+    city { Faker::Address.city }
+    country { Faker::Address.country }
+    latitude { Faker::Address.latitude }
+    longitude { Faker::Address.longitude }
   end
 end
