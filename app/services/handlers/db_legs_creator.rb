@@ -4,6 +4,7 @@ module Handlers
   class DbLegsCreator
     def call(route)
       @route = route
+      create_leg
       nil
     end
 
