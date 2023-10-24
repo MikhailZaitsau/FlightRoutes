@@ -18,23 +18,13 @@ module Handlers
     def fetch_flight_number_from_db
       @flight_number = FlightNumber.includes(:legs).find_by(flight_number: @query_data)
       if !@flight_number
-        add_new_flight_number_to_db
+        false
       elsif @flight_number.updated_at < 24.hours.ago
-        destroy_flight_number_and_add_new_to_db
+        flight_number.destroy
+        false
       else
         parse_legs(@flight_number)
       end
-    end
-
-    def add_new_flight_number_to_db
-      FlightNumber.create(@flight_number)
-      false
-    end
-
-    def destroy_flight_number_and_add_new_to_db
-      flight_number.destroy
-      FlightNumber.create(@flight_number)
-      false
     end
 
     def parse_legs(flight_number)

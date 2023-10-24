@@ -9,6 +9,7 @@ module Handlers
       @token_header = Authorization::HeaderToken.new.call
       return @token_header unless @token_header.is_a?(String)
 
+      FlightNumber.create(flight_number: @normalized_flight_number)
       route_response = fetch_response
       if route_response.is_a?(HTTParty::Response)
         handle_response(route_response)
