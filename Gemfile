@@ -84,4 +84,6 @@ group :test do
   gem 'shoulda-matchers', '~> 5.0'
 end
 
-gem "vcr", "~> 6.2"
+gem 'vcr', '~> 6.2'
+
+gem 'webmock', '~> 3.19'
