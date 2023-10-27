@@ -1,0 +1,97 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://test.api.amadeus.com/v2/schedule/flights?carrierCode=LH&flightNumber=2479&scheduledDepartureDate=2023-10-28
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <BEARER_TOKEN>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 28 Oct 2023 00:54:08 GMT
+      Content-Type:
+      - application/vnd.amadeus+json
+      Content-Length:
+      - '1242'
+      Connection:
+      - keep-alive
+      Ama-Internal-Message-Version:
+      - '14.1'
+      Ama-Request-Id:
+      - 0001P1WIX37RU8
+      Ama-Gateway-Request-Id:
+      - rrt-0410e1c88463657c5-a-de-25247-11969933-1
+      Access-Control-Allow-Headers:
+      - origin, x-requested-with, accept, Content-Type, Authorization
+      Access-Control-Max-Age:
+      - '3628800'
+      Access-Control-Allow-Methods:
+      - "*"
+      Server:
+      - Amadeus
+      Access-Control-Allow-Origin:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "meta" : {
+            "count" : 1,
+            "links" : {
+              "self" : "https://test.api.amadeus.com/v2/schedule/flights?carrierCode=LH&flightNumber=2479&scheduledDepartureDate=2023-10-28"
+            }
+          },
+          "data" : [ {
+            "type" : "DatedFlight",
+            "scheduledDepartureDate" : "2023-10-28",
+            "flightDesignator" : {
+              "carrierCode" : "LH",
+              "flightNumber" : 2479
+            },
+            "flightPoints" : [ {
+              "iataCode" : "LHR",
+              "departure" : {
+                "timings" : [ {
+                  "qualifier" : "STD",
+                  "value" : "2023-10-28T17:50+01:00"
+                } ]
+              }
+            }, {
+              "iataCode" : "MUC",
+              "arrival" : {
+                "timings" : [ {
+                  "qualifier" : "STA",
+                  "value" : "2023-10-28T20:40+02:00"
+                } ]
+              }
+            } ],
+            "segments" : [ {
+              "boardPointIataCode" : "LHR",
+              "offPointIataCode" : "MUC",
+              "scheduledSegmentDuration" : "PT1H50M",
+              "partnership" : {
+                "operatingFlight" : {
+                  "carrierCode" : "AV",
+                  "flightNumber" : 6524
+                }
+              }
+            } ],
+            "legs" : [ {
+              "boardPointIataCode" : "LHR",
+              "offPointIataCode" : "MUC",
+              "aircraftEquipment" : {
+                "aircraftType" : "320"
+              },
+              "scheduledLegDuration" : "PT1H50M"
+            } ]
+          } ]
+        }
+  recorded_at: Sat, 28 Oct 2023 00:54:07 GMT
+recorded_with: VCR 6.2.0

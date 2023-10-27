@@ -8,6 +8,25 @@ require_relative '../config/environment'
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 require 'support/factory_bot'
+require 'httparty'
+require 'vcr'
+
+VCR.configure do |config|
+  config.cassette_library_dir = 'fixtures/vcr_cassettes'
+  config.hook_into :webmock
+  config.default_cassette_options = {
+    match_requests_on: [:method, VCR.request_matchers.uri_without_param(:scheduledDepartureDate)]
+  }
+  config.ignore_request do |request|
+    request.uri == 'https://test.api.amadeus.com/v1/security/oauth2/token'
+  end
+  config.filter_sensitive_data('<BEARER_TOKEN>') do |interaction|
+    auths = interaction.request.headers['Authorization'].first
+    if (match = auths.match(/^Bearer\s+([^,\s]+)/))
+      match.captures.first
+    end
+  end
+end
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in

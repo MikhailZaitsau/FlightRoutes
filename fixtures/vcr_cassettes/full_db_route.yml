@@ -1,0 +1,84 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://test.api.amadeus.com/v1/reference-data/locations?keyword=CDG&subType=AIRPORT
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <BEARER_TOKEN>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 27 Oct 2023 23:29:37 GMT
+      Content-Type:
+      - application/vnd.amadeus+json
+      Content-Length:
+      - '1146'
+      Connection:
+      - keep-alive
+      Ama-Request-Id:
+      - 00011K92Q37NXD
+      Ama-Gateway-Request-Id:
+      - rrt-0f4a742ed0eb9a063-b-de-11131-11752058-1
+      Access-Control-Allow-Headers:
+      - origin, x-requested-with, accept, Content-Type, Authorization
+      Access-Control-Max-Age:
+      - '3628800'
+      Access-Control-Allow-Methods:
+      - "*"
+      Server:
+      - Amadeus
+      Access-Control-Allow-Origin:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+            "meta": {
+                "count": 1,
+                "links": {
+                    "self": "https://test.api.amadeus.com/v1/reference-data/locations?subType=AIRPORT&keyword=CDG"
+                }
+            },
+            "data": [
+                {
+                    "type": "location",
+                    "subType": "AIRPORT",
+                    "name": "CHARLES DE GAULLE",
+                    "detailedName": "PARIS/FR:CHARLES DE GAULLE",
+                    "id": "ACDG",
+                    "self": {
+                        "href": "https://test.api.amadeus.com/v1/reference-data/locations/ACDG",
+                        "methods": [
+                            "GET"
+                        ]
+                    },
+                    "timeZoneOffset": "+02:00",
+                    "iataCode": "CDG",
+                    "geoCode": {
+                        "latitude": 49.01278,
+                        "longitude": 2.55000
+                    },
+                    "address": {
+                        "cityName": "PARIS",
+                        "cityCode": "PAR",
+                        "countryName": "FRANCE",
+                        "countryCode": "FR",
+                        "regionCode": "EUROP"
+                    },
+                    "analytics": {
+                        "travelers": {
+                            "score": 42
+                        }
+                    }
+                }
+            ]
+        }
+  recorded_at: Fri, 27 Oct 2023 23:29:36 GMT
+recorded_with: VCR 6.2.0

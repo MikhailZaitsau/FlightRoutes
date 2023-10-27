@@ -1,0 +1,259 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://test.api.amadeus.com/v2/schedule/flights?carrierCode=LH&flightNumber=2479&scheduledDepartureDate=2023-10-27
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <BEARER_TOKEN>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 27 Oct 2023 23:29:34 GMT
+      Content-Type:
+      - application/vnd.amadeus+json
+      Content-Length:
+      - '1242'
+      Connection:
+      - keep-alive
+      Ama-Internal-Message-Version:
+      - '14.1'
+      Ama-Request-Id:
+      - 00011K91F37NXA
+      Ama-Gateway-Request-Id:
+      - rrt-0f4a742ed0eb9a063-b-de-11131-11751901-1
+      Access-Control-Allow-Headers:
+      - origin, x-requested-with, accept, Content-Type, Authorization
+      Access-Control-Max-Age:
+      - '3628800'
+      Access-Control-Allow-Methods:
+      - "*"
+      Server:
+      - Amadeus
+      Access-Control-Allow-Origin:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "meta" : {
+            "count" : 1,
+            "links" : {
+              "self" : "https://test.api.amadeus.com/v2/schedule/flights?carrierCode=LH&flightNumber=2479&scheduledDepartureDate=2023-10-27"
+            }
+          },
+          "data" : [ {
+            "type" : "DatedFlight",
+            "scheduledDepartureDate" : "2023-10-27",
+            "flightDesignator" : {
+              "carrierCode" : "LH",
+              "flightNumber" : 2479
+            },
+            "flightPoints" : [ {
+              "iataCode" : "LHR",
+              "departure" : {
+                "timings" : [ {
+                  "qualifier" : "STD",
+                  "value" : "2023-10-27T17:50+01:00"
+                } ]
+              }
+            }, {
+              "iataCode" : "MUC",
+              "arrival" : {
+                "timings" : [ {
+                  "qualifier" : "STA",
+                  "value" : "2023-10-27T20:40+02:00"
+                } ]
+              }
+            } ],
+            "segments" : [ {
+              "boardPointIataCode" : "LHR",
+              "offPointIataCode" : "MUC",
+              "scheduledSegmentDuration" : "PT1H50M",
+              "partnership" : {
+                "operatingFlight" : {
+                  "carrierCode" : "AV",
+                  "flightNumber" : 6524
+                }
+              }
+            } ],
+            "legs" : [ {
+              "boardPointIataCode" : "LHR",
+              "offPointIataCode" : "MUC",
+              "aircraftEquipment" : {
+                "aircraftType" : "320"
+              },
+              "scheduledLegDuration" : "PT1H50M"
+            } ]
+          } ]
+        }
+  recorded_at: Fri, 27 Oct 2023 23:29:33 GMT
+- request:
+    method: get
+    uri: https://test.api.amadeus.com/v1/reference-data/locations?keyword=LHR&subType=AIRPORT
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <BEARER_TOKEN>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 27 Oct 2023 23:29:34 GMT
+      Content-Type:
+      - application/vnd.amadeus+json
+      Content-Length:
+      - '1139'
+      Connection:
+      - keep-alive
+      Ama-Request-Id:
+      - 0001OZIPW37NXA
+      Ama-Gateway-Request-Id:
+      - rrt-0f4a742ed0eb9a063-b-de-11131-11751915-1
+      Access-Control-Allow-Headers:
+      - origin, x-requested-with, accept, Content-Type, Authorization
+      Access-Control-Max-Age:
+      - '3628800'
+      Access-Control-Allow-Methods:
+      - "*"
+      Server:
+      - Amadeus
+      Access-Control-Allow-Origin:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+            "meta": {
+                "count": 1,
+                "links": {
+                    "self": "https://test.api.amadeus.com/v1/reference-data/locations?subType=AIRPORT&keyword=LHR"
+                }
+            },
+            "data": [
+                {
+                    "type": "location",
+                    "subType": "AIRPORT",
+                    "name": "HEATHROW",
+                    "detailedName": "LONDON/GB:HEATHROW",
+                    "id": "ALHR",
+                    "self": {
+                        "href": "https://test.api.amadeus.com/v1/reference-data/locations/ALHR",
+                        "methods": [
+                            "GET"
+                        ]
+                    },
+                    "timeZoneOffset": "+01:00",
+                    "iataCode": "LHR",
+                    "geoCode": {
+                        "latitude": 51.47750,
+                        "longitude": -0.46138
+                    },
+                    "address": {
+                        "cityName": "LONDON",
+                        "cityCode": "LON",
+                        "countryName": "UNITED KINGDOM",
+                        "countryCode": "GB",
+                        "regionCode": "EUROP"
+                    },
+                    "analytics": {
+                        "travelers": {
+                            "score": 45
+                        }
+                    }
+                }
+            ]
+        }
+  recorded_at: Fri, 27 Oct 2023 23:29:33 GMT
+- request:
+    method: get
+    uri: https://test.api.amadeus.com/v1/reference-data/locations?keyword=MUC&subType=AIRPORT
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <BEARER_TOKEN>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 27 Oct 2023 23:29:35 GMT
+      Content-Type:
+      - application/vnd.amadeus+json
+      Content-Length:
+      - '1156'
+      Connection:
+      - keep-alive
+      Ama-Request-Id:
+      - 00011K91T37NXB
+      Ama-Gateway-Request-Id:
+      - rrt-0f4a742ed0eb9a063-b-de-11131-11751941-1
+      Access-Control-Allow-Headers:
+      - origin, x-requested-with, accept, Content-Type, Authorization
+      Access-Control-Max-Age:
+      - '3628800'
+      Access-Control-Allow-Methods:
+      - "*"
+      Server:
+      - Amadeus
+      Access-Control-Allow-Origin:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+            "meta": {
+                "count": 1,
+                "links": {
+                    "self": "https://test.api.amadeus.com/v1/reference-data/locations?subType=AIRPORT&keyword=MUC"
+                }
+            },
+            "data": [
+                {
+                    "type": "location",
+                    "subType": "AIRPORT",
+                    "name": "MUNICH INTERNATIONAL",
+                    "detailedName": "MUNICH/DE:MUNICH INTERNATIONAL",
+                    "id": "AMUC",
+                    "self": {
+                        "href": "https://test.api.amadeus.com/v1/reference-data/locations/AMUC",
+                        "methods": [
+                            "GET"
+                        ]
+                    },
+                    "timeZoneOffset": "+02:00",
+                    "iataCode": "MUC",
+                    "geoCode": {
+                        "latitude": 48.35389,
+                        "longitude": 11.78612
+                    },
+                    "address": {
+                        "cityName": "MUNICH",
+                        "cityCode": "MUC",
+                        "countryName": "GERMANY",
+                        "countryCode": "DE",
+                        "regionCode": "EUROP"
+                    },
+                    "analytics": {
+                        "travelers": {
+                            "score": 27
+                        }
+                    }
+                }
+            ]
+        }
+  recorded_at: Fri, 27 Oct 2023 23:29:34 GMT
+recorded_with: VCR 6.2.0

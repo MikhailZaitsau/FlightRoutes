@@ -1,0 +1,84 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://test.api.amadeus.com/v1/reference-data/locations?keyword=LHR&subType=AIRPORT
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <BEARER_TOKEN>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 27 Oct 2023 23:29:41 GMT
+      Content-Type:
+      - application/vnd.amadeus+json
+      Content-Length:
+      - '1139'
+      Connection:
+      - keep-alive
+      Ama-Request-Id:
+      - 00011K94G37NXH
+      Ama-Gateway-Request-Id:
+      - rrt-0199f43396dec0872-b-de-25074-10914286-1
+      Access-Control-Allow-Headers:
+      - origin, x-requested-with, accept, Content-Type, Authorization
+      Access-Control-Max-Age:
+      - '3628800'
+      Access-Control-Allow-Methods:
+      - "*"
+      Server:
+      - Amadeus
+      Access-Control-Allow-Origin:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+            "meta": {
+                "count": 1,
+                "links": {
+                    "self": "https://test.api.amadeus.com/v1/reference-data/locations?subType=AIRPORT&keyword=LHR"
+                }
+            },
+            "data": [
+                {
+                    "type": "location",
+                    "subType": "AIRPORT",
+                    "name": "HEATHROW",
+                    "detailedName": "LONDON/GB:HEATHROW",
+                    "id": "ALHR",
+                    "self": {
+                        "href": "https://test.api.amadeus.com/v1/reference-data/locations/ALHR",
+                        "methods": [
+                            "GET"
+                        ]
+                    },
+                    "timeZoneOffset": "+01:00",
+                    "iataCode": "LHR",
+                    "geoCode": {
+                        "latitude": 51.47750,
+                        "longitude": -0.46138
+                    },
+                    "address": {
+                        "cityName": "LONDON",
+                        "cityCode": "LON",
+                        "countryName": "UNITED KINGDOM",
+                        "countryCode": "GB",
+                        "regionCode": "EUROP"
+                    },
+                    "analytics": {
+                        "travelers": {
+                            "score": 45
+                        }
+                    }
+                }
+            ]
+        }
+  recorded_at: Fri, 27 Oct 2023 23:29:40 GMT
+recorded_with: VCR 6.2.0

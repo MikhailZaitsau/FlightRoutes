@@ -1,0 +1,52 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://test.api.amadeus.com/v1/reference-data/locations?keyword=OOO&subType=AIRPORT
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <BEARER_TOKEN>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 27 Oct 2023 23:29:41 GMT
+      Content-Type:
+      - application/vnd.amadeus+json
+      Content-Length:
+      - '195'
+      Connection:
+      - keep-alive
+      Ama-Request-Id:
+      - 0001OZISP37NXH
+      Ama-Gateway-Request-Id:
+      - rrt-0199f43396dec0872-b-de-25076-10914339-1
+      Access-Control-Allow-Headers:
+      - origin, x-requested-with, accept, Content-Type, Authorization
+      Access-Control-Max-Age:
+      - '3628800'
+      Access-Control-Allow-Methods:
+      - "*"
+      Server:
+      - Amadeus
+      Access-Control-Allow-Origin:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+            "meta": {
+                "count": 0,
+                "links": {
+                    "self": "https://test.api.amadeus.com/v1/reference-data/locations?subType=AIRPORT&keyword=OOO"
+                }
+            },
+            "data": []
+        }
+  recorded_at: Fri, 27 Oct 2023 23:29:40 GMT
+recorded_with: VCR 6.2.0
