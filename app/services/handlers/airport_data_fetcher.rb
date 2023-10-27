@@ -2,12 +2,9 @@
 
 module Handlers
   class AirportDataFetcher < Core::Service
-    def call(airport_iata_code)
+    def call(airport_iata_code, token)
       @airport_iata_code = airport_iata_code
-      return airport_from_db if airport_from_db
-
-      @token_header = Authorization::HeaderToken.new.call
-      return @token_header unless @token_header.is_a?(String)
+      @token_header = token
 
       fetch_airport_from_api
     end
@@ -17,11 +14,11 @@ module Handlers
     def fetch_airport_from_api
       @airport_response = fetch_response
       if @airport_response.is_a?(HTTParty::Response)
-        airport = generate_hash
+        airport = yield generate_hash
         Airport.create(airport)
-        airport
+        Success(airport)
       else
-        @airport_response
+        Failure(@airport_response)
       end
     end
 
@@ -45,11 +42,7 @@ module Handlers
     end
 
     def airport_data
-      JSON.parse(@airport_response)['data'][0]
-    end
-
-    def airport_from_db
-      Handlers::DatabaseCheker.new.call(@airport_iata_code)
+      @airport_data ||= JSON.parse(@airport_response)['data'][0]
     end
 
     def generate_hash

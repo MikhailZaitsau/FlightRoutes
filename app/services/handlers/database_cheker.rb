@@ -30,16 +30,12 @@ module Handlers
     def parse_legs(flight_number)
       legs = flight_number.legs.map(&:attributes).map(&:symbolize_keys)
                           .map { |leg| leg.except(:id, :flight_number_id, :created_at, :updated_at) }
-      legs.count == 1 ? generate_hash(legs[0]) : generate_hash(legs)
+      legs.count == 1 ? legs[0] : legs
     end
 
     def fetch_airport_from_db
       airport = Airport.find_by(iata: @query_data)
       airport ? airport.attributes.symbolize_keys.except(:id, :created_at, :updated_at) : false
-    end
-
-    def generate_hash(route_from_db)
-      Handlers::HashGenerator.new.call(route_from_db:)
     end
   end
 end

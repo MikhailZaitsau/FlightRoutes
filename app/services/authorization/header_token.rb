@@ -7,7 +7,11 @@ module Authorization
       encripted_header
       result = token
 
-      result.is_a?(String) ? "Bearer #{result}" : Handlers::ErrorMessageHandler.new.call('Authorization error')
+      if result.is_a?(String)
+        Success("Bearer #{result}")
+      else
+        Failure(Handlers::ErrorMessageHandler.new.call('Authorization error'))
+      end
     end
 
     private

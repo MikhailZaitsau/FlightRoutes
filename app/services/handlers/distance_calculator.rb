@@ -3,16 +3,35 @@
 module Handlers
   class DistanceCalculator < Core::Service
     # A service that calculates the distance between two airports based on their coordinates using the haversine formula
-    def call(airports_coordinates)
-      return Handlers::ErrorMessageHandler.new.call('Wrong coordinates') if airports_coordinates.any?(&:nil?)
+    def call(route)
+      airports_coordinates = if route.is_a?(Hash)
+                               single_leg_coordinates(route)
+                             else
+                               multi_legs_coordinates(route)
+                             end
+      return Failure(Handlers::ErrorMessageHandler.new.call('Wrong coordinates')) if airports_coordinates.any?(&:nil?)
 
       airports_coordinates_in_radians = to_radians(airports_coordinates)
-      haversine_distance(*airports_coordinates_in_radians)
+      Success(haversine_distance(*airports_coordinates_in_radians))
     end
 
     private
 
     EARTH_RADIUS = 6371
+
+    def single_leg_coordinates(route)
+      [route.dig(:departure, :latitude),
+       route.dig(:departure, :longitude),
+       route.dig(:arrival, :latitude),
+       route.dig(:arrival, :longitude)]
+    end
+
+    def multi_legs_coordinates(route)
+      [route.dig(0, :departure, :latitude),
+       route.dig(0, :departure, :longitude),
+       route.dig(-1, :arrival, :latitude),
+       route.dig(-1, :arrival, :longitude)]
+    end
 
     def hav(angle)
       Math.sin(angle / 2)**2
