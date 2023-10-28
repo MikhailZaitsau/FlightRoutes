@@ -19,8 +19,8 @@ module Handlers
       @flight_number = FlightNumber.includes(:legs).find_by(flight_number: @query_data)
       if !@flight_number
         false
-      elsif @flight_number.updated_at < 24.hours.ago
-        flight_number.destroy
+      elsif @flight_number.updated_at < 24.hours.ago || @flight_number.legs.count < 1
+        @flight_number.destroy
         false
       else
         parse_legs(@flight_number)

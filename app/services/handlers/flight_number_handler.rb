@@ -3,11 +3,11 @@
 module Handlers
   class FlightNumberHandler < Core::Service
     def call(flight_number)
-      normalized_flight_number = yield check_and_normalize_flight_number(flight_number)
-      if check_if_data_in_db(normalized_flight_number)
-        handle_route_from_database(check_if_data_in_db(normalized_flight_number))
+      @normalized_flight_number = yield check_and_normalize_flight_number(flight_number)
+      if check_if_data_in_db(@normalized_flight_number)
+        handle_route_from_database(check_if_data_in_db(@normalized_flight_number))
       else
-        fetch_and_handle_route_from_api(normalized_flight_number)
+        fetch_and_handle_route_from_api
       end
     end
 
@@ -22,9 +22,8 @@ module Handlers
       end
     end
 
-    def fetch_and_handle_route_from_api(normalized_flight_number)
-      route = yield fetch_route_from_api(normalized_flight_number)
-      FlightNumber.create(flight_number: normalized_flight_number)
+    def fetch_and_handle_route_from_api
+      route = yield fetch_route_from_api
       @need_create_leg_in_db = true
       if route.count == 1
         generate_single_leg_route_hash(route[0])
@@ -41,7 +40,7 @@ module Handlers
 
       route = { departure:, arrival: }
       distance = route_data[:distance] || calculate_distance(route)
-      Handlers::DbLegsCreator.new.call(route, distance) if @need_create_leg_in_db
+      Handlers::DbDataCreator.new.call(route, distance, @normalized_flight_number) if @need_create_leg_in_db
       Success(generate_hash({ route:, distance: }))
     end
 
@@ -64,8 +63,8 @@ module Handlers
       @fetch_header_token ||= yield Authorization::HeaderToken.new.call
     end
 
-    def fetch_route_from_api(normalized_flight_number)
-      Handlers::RoutesFetcher.new.call(normalized_flight_number, fetch_header_token)
+    def fetch_route_from_api
+      Handlers::RoutesFetcher.new.call(@normalized_flight_number, fetch_header_token)
     end
 
     def generate_hash(route_data)
