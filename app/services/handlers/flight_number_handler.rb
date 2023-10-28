@@ -45,7 +45,7 @@ module Handlers
     def generate_multi_leg_route_hash(route_data)
       route = []
       route_data.each { |leg| route << generate_single_leg_route_hash(leg)[:route].except(:status, :error_message) }
-      distance = yield calculate_distance(route)
+      distance = calculate_distance(route)
       yield generate_hash({ route:, distance: })
     end
 
@@ -76,7 +76,7 @@ module Handlers
     end
 
     def calculate_distance(route)
-      Handlers::DistanceCalculator.new.call(route)
+      yield Handlers::DistanceCalculator.new.call(route)
     end
   end
 end

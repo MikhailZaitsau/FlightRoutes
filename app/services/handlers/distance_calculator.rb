@@ -2,7 +2,7 @@
 
 module Handlers
   class DistanceCalculator < Core::Service
-    # A service that calculates the distance between two airports based on their coordinates using the haversine formula
+    # Service that calculates the distance between two airports based on their coordinates using the haversine formula
     def call(route)
       airports_coordinates = if route.is_a?(Hash)
                                single_leg_coordinates(route)

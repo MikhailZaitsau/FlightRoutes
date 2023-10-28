@@ -21,6 +21,16 @@ RSpec.describe 'FlightRoutesController' do
       expect(FlightNumber.last.flight_number).to eq(flightnumber)
     end
 
+    it 'create leg to new flight number in database' do
+      VCR.use_cassette('full_route') { get "/flight_routes?flight_number=#{flightnumber}" }
+      expect(Leg.last.flight_number_id).to eq(FlightNumber.last.id)
+    end
+
+    it 'distance not zero' do
+      VCR.use_cassette('full_route') { get "/flight_routes?flight_number=#{flightnumber}" }
+      expect(response.parsed_body['distance'].to_i).to be > 0
+    end
+
     context 'when route and airport in db' do
       let(:flight_number) { create(:flight_number) }
       let(:flightnumber) { flight_number.flight_number }
@@ -42,6 +52,11 @@ RSpec.describe 'FlightRoutesController' do
       it 'distance beetwen firsta department and last arrival not zero' do
         VCR.use_cassette('full_db_route') { get "/flight_routes?flight_number=#{flightnumber}" }
         expect(response.parsed_body['distance'].to_i).to be > 0
+      end
+
+      it "doesn't create additional legs in database" do
+        VCR.use_cassette('full_db_route') { get "/flight_routes?flight_number=#{flightnumber}" }
+        expect(Leg.count).to eq(3)
       end
     end
 
