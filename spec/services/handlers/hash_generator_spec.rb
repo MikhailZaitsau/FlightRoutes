@@ -6,7 +6,9 @@ RSpec.describe Handlers::HashGenerator do
   describe 'call' do
     context 'when call with route data' do
       let(:departure) { { city: 'MUNICH', country: 'GERMANY', iata: 'MUC', latitude: 48.35389, longitude: 11.78612 } }
-      let(:arrival) { { city: 'LONDON', country: 'UNITED KINGDOM', iata: 'LHR', latitude: 51.4775, longitude: -0.46138 } }
+      let(:arrival) do
+        { city: 'LONDON', country: 'UNITED KINGDOM', iata: 'LHR', latitude: 51.4775, longitude: -0.46138 }
+      end
       let(:distance) { 942 }
       let(:route) { { departure:, arrival: } }
       let(:route_data) { { route:, distance: } }
@@ -31,10 +33,13 @@ RSpec.describe Handlers::HashGenerator do
         end
       end
       let(:airport_data) { JSON.parse(airport_response)['data'][0] }
+      let(:expected_result) do
+        { iata: 'LHR', city: 'LONDON', country: 'UNITED KINGDOM', latitude: 51.4775, longitude: -0.46138 }
+      end
 
       it 'returns correct route hash' do
         result = described_class.new.call(airport_data:)
-        expect(result.success).to eq({ iata: 'LHR', city: 'LONDON', country: 'UNITED KINGDOM', latitude: 51.4775, longitude: -0.46138 })
+        expect(result.success).to eq(expected_result)
       end
     end
   end
