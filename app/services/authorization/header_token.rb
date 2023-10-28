@@ -5,13 +5,7 @@ module Authorization
   class HeaderToken < Core::Service
     def call
       encripted_header
-      result = token
-
-      if result.is_a?(String)
-        Success("Bearer #{result}")
-      else
-        Failure(Handlers::ErrorMessageHandler.new.call('Authorization error'))
-      end
+      Success(token) || Failure(@error)
     end
 
     private
@@ -23,21 +17,19 @@ module Authorization
     end
 
     def token
-      @access_token = AuthToken.last
-      return @access_token.token if @access_token && !needs_refresh?
+      return @access_token if @access_token
 
       update_access_token
       @access_token
     end
 
-    def needs_refresh?
-      @access_token.nil? || (Time.current + 10) > @access_token.expires_at
-    end
-
     def update_access_token
-      @access_token&.destroy
       response = fetch_access_token
-      store_access_token(response)
+      if response['access_token']
+        store_access_token(response)
+      else
+        @error = response
+      end
     end
 
     def fetch_access_token
@@ -57,9 +49,9 @@ module Authorization
     end
 
     def store_access_token(response)
-      @access_token = response['access_token']
-      expires_at = Time.current + response['expires_in']
-      AuthToken.create(token: @access_token, expires_at:)
+      Rails.cache.fetch('header token', expires_in: response['expires_in'] - 10) do
+        @access_token = response['access_token']
+      end
     end
   end
 end
