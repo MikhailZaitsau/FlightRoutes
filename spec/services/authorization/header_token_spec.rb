@@ -6,7 +6,7 @@ RSpec.describe Authorization::HeaderToken do
   describe 'call' do
     it 'returns a valid token' do
       token = described_class.new.call.success
-      expect(token) =~ "Bearer #{/^[a-zA-Z0-9]{30}$/}"
+      expect(token) =~ (/^Bearer\s+([^,\s]+)/)
     end
 
     context 'when token stored' do

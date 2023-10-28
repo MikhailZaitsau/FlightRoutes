@@ -5,7 +5,8 @@ module Authorization
   class HeaderToken < Core::Service
     def call
       encripted_header
-      Success(token) || Failure(@error)
+      result = token
+      Success("Bearer #{result}") || Failure(@error)
     end
 
     private
@@ -49,8 +50,8 @@ module Authorization
     end
 
     def store_access_token(response)
-      Rails.cache.fetch('header token', expires_in: response['expires_in'] - 10) do
-        @access_token = response['access_token']
+      @access_token = Rails.cache.fetch('header token', expires_in: response['expires_in']) do
+        response['access_token']
       end
     end
   end
