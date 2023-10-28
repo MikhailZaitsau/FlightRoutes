@@ -15,7 +15,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 27 Oct 2023 23:29:41 GMT
+      - Sat, 28 Oct 2023 13:24:10 GMT
       Content-Type:
       - application/vnd.amadeus+json
       Content-Length:
@@ -23,9 +23,9 @@ http_interactions:
       Connection:
       - keep-alive
       Ama-Request-Id:
-      - 0001OZISP37NXH
+      - 0001PFNUC38QKA
       Ama-Gateway-Request-Id:
-      - rrt-0199f43396dec0872-b-de-25076-10914339-1
+      - rrt-0f4a742ed0eb9a063-b-de-11132-15344953-1
       Access-Control-Allow-Headers:
       - origin, x-requested-with, accept, Content-Type, Authorization
       Access-Control-Max-Age:
@@ -48,5 +48,5 @@ http_interactions:
             },
             "data": []
         }
-  recorded_at: Fri, 27 Oct 2023 23:29:40 GMT
+  recorded_at: Sat, 28 Oct 2023 13:24:09 GMT
 recorded_with: VCR 6.2.0

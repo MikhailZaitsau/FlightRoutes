@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://test.api.amadeus.com/v2/schedule/flights?carrierCode=LH&flightNumber=2479&scheduledDepartureDate=2023-10-27
+    uri: https://test.api.amadeus.com/v2/schedule/flights?carrierCode=LH&flightNumber=2479&scheduledDepartureDate=2023-10-28
     body:
       encoding: US-ASCII
       string: ''
@@ -15,7 +15,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 27 Oct 2023 23:29:34 GMT
+      - Sat, 28 Oct 2023 13:33:38 GMT
       Content-Type:
       - application/vnd.amadeus+json
       Content-Length:
@@ -25,9 +25,9 @@ http_interactions:
       Ama-Internal-Message-Version:
       - '14.1'
       Ama-Request-Id:
-      - 00011K91F37NXA
+      - 0001PFRFN38R02
       Ama-Gateway-Request-Id:
-      - rrt-0f4a742ed0eb9a063-b-de-11131-11751901-1
+      - rrt-0199f43396dec0872-b-de-25075-14404283-1
       Access-Control-Allow-Headers:
       - origin, x-requested-with, accept, Content-Type, Authorization
       Access-Control-Max-Age:
@@ -45,12 +45,12 @@ http_interactions:
           "meta" : {
             "count" : 1,
             "links" : {
-              "self" : "https://test.api.amadeus.com/v2/schedule/flights?carrierCode=LH&flightNumber=2479&scheduledDepartureDate=2023-10-27"
+              "self" : "https://test.api.amadeus.com/v2/schedule/flights?carrierCode=LH&flightNumber=2479&scheduledDepartureDate=2023-10-28"
             }
           },
           "data" : [ {
             "type" : "DatedFlight",
-            "scheduledDepartureDate" : "2023-10-27",
+            "scheduledDepartureDate" : "2023-10-28",
             "flightDesignator" : {
               "carrierCode" : "LH",
               "flightNumber" : 2479
@@ -60,7 +60,7 @@ http_interactions:
               "departure" : {
                 "timings" : [ {
                   "qualifier" : "STD",
-                  "value" : "2023-10-27T17:50+01:00"
+                  "value" : "2023-10-28T17:50+01:00"
                 } ]
               }
             }, {
@@ -68,7 +68,7 @@ http_interactions:
               "arrival" : {
                 "timings" : [ {
                   "qualifier" : "STA",
-                  "value" : "2023-10-27T20:40+02:00"
+                  "value" : "2023-10-28T20:40+02:00"
                 } ]
               }
             } ],
@@ -93,7 +93,7 @@ http_interactions:
             } ]
           } ]
         }
-  recorded_at: Fri, 27 Oct 2023 23:29:33 GMT
+  recorded_at: Sat, 28 Oct 2023 13:33:37 GMT
 - request:
     method: get
     uri: https://test.api.amadeus.com/v1/reference-data/locations?keyword=LHR&subType=AIRPORT
@@ -109,7 +109,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 27 Oct 2023 23:29:34 GMT
+      - Sat, 28 Oct 2023 13:33:38 GMT
       Content-Type:
       - application/vnd.amadeus+json
       Content-Length:
@@ -117,9 +117,9 @@ http_interactions:
       Connection:
       - keep-alive
       Ama-Request-Id:
-      - 0001OZIPW37NXA
+      - 0001PFRFR38R02
       Ama-Gateway-Request-Id:
-      - rrt-0f4a742ed0eb9a063-b-de-11131-11751915-1
+      - rrt-0199f43396dec0872-b-de-25074-14404354-1
       Access-Control-Allow-Headers:
       - origin, x-requested-with, accept, Content-Type, Authorization
       Access-Control-Max-Age:
@@ -174,7 +174,7 @@ http_interactions:
                 }
             ]
         }
-  recorded_at: Fri, 27 Oct 2023 23:29:33 GMT
+  recorded_at: Sat, 28 Oct 2023 13:33:37 GMT
 - request:
     method: get
     uri: https://test.api.amadeus.com/v1/reference-data/locations?keyword=MUC&subType=AIRPORT
@@ -190,7 +190,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 27 Oct 2023 23:29:35 GMT
+      - Sat, 28 Oct 2023 13:33:38 GMT
       Content-Type:
       - application/vnd.amadeus+json
       Content-Length:
@@ -198,9 +198,9 @@ http_interactions:
       Connection:
       - keep-alive
       Ama-Request-Id:
-      - 00011K91T37NXB
+      - 000120PZQ38R02
       Ama-Gateway-Request-Id:
-      - rrt-0f4a742ed0eb9a063-b-de-11131-11751941-1
+      - rrt-0199f43396dec0872-b-de-25074-14404378-1
       Access-Control-Allow-Headers:
       - origin, x-requested-with, accept, Content-Type, Authorization
       Access-Control-Max-Age:
@@ -255,5 +255,5 @@ http_interactions:
                 }
             ]
         }
-  recorded_at: Fri, 27 Oct 2023 23:29:34 GMT
+  recorded_at: Sat, 28 Oct 2023 13:33:37 GMT
 recorded_with: VCR 6.2.0

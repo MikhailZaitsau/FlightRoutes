@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://test.api.amadeus.com/v2/schedule/flights?carrierCode=XX&flightNumber=7777&scheduledDepartureDate=2023-10-27
+    uri: https://test.api.amadeus.com/v2/schedule/flights?carrierCode=XX&flightNumber=7777&scheduledDepartureDate=2023-10-28
     body:
       encoding: US-ASCII
       string: ''
@@ -15,7 +15,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 27 Oct 2023 23:29:43 GMT
+      - Sat, 28 Oct 2023 13:24:13 GMT
       Content-Type:
       - application/vnd.amadeus+json
       Content-Length:
@@ -25,9 +25,9 @@ http_interactions:
       Ama-Internal-Message-Version:
       - '14.1'
       Ama-Request-Id:
-      - 0001OZIU337NXJ
+      - 000120JLO38QKD
       Ama-Gateway-Request-Id:
-      - rrt-0199f43396dec0872-b-de-25074-10914465-1
+      - rrt-0f4a742ed0eb9a063-b-de-11131-15345227-1
       Access-Control-Allow-Headers:
       - origin, x-requested-with, accept, Content-Type, Authorization
       Access-Control-Max-Age:
@@ -45,10 +45,10 @@ http_interactions:
           "meta" : {
             "count" : 0,
             "links" : {
-              "self" : "https://test.api.amadeus.com/v2/schedule/flights?carrierCode=XX&flightNumber=7777&scheduledDepartureDate=2023-10-27"
+              "self" : "https://test.api.amadeus.com/v2/schedule/flights?carrierCode=XX&flightNumber=7777&scheduledDepartureDate=2023-10-28"
             }
           },
           "data" : [ ]
         }
-  recorded_at: Fri, 27 Oct 2023 23:29:42 GMT
+  recorded_at: Sat, 28 Oct 2023 13:24:12 GMT
 recorded_with: VCR 6.2.0
