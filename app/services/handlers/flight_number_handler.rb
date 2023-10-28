@@ -5,9 +5,9 @@ module Handlers
     def call(flight_number)
       normalized_flight_number = yield check_and_normalize_flight_number(flight_number)
       if check_if_data_in_db(normalized_flight_number)
-        Success(handle_route_from_database(check_if_data_in_db(normalized_flight_number)))
+        handle_route_from_database(check_if_data_in_db(normalized_flight_number))
       else
-        Success(fetch_and_handle_route_from_api(normalized_flight_number))
+        fetch_and_handle_route_from_api(normalized_flight_number)
       end
     end
 
@@ -36,17 +36,20 @@ module Handlers
     def generate_single_leg_route_hash(route_data)
       departure = fetch_airports_data(route_data[:departure] || route_data['boardPointIataCode'])
       arrival = fetch_airports_data(route_data[:arrival] || route_data['offPointIataCode'])
+      return departure unless departure.is_a?(Hash)
+      return arrival unless arrival.is_a?(Hash)
+
       route = { departure:, arrival: }
       distance = route_data[:distance] || calculate_distance(route)
       Handlers::DbLegsCreator.new.call(route, distance) if @need_create_leg_in_db
-      yield generate_hash({ route:, distance: })
+      Success(generate_hash({ route:, distance: }))
     end
 
     def generate_multi_leg_route_hash(route_data)
       route = []
-      route_data.each { |leg| route << generate_single_leg_route_hash(leg)[:route].except(:status, :error_message) }
+      route_data.each { |leg| route << generate_single_leg_route_hash(leg).success[:route].except(:status, :error_message) }
       distance = calculate_distance(route)
-      yield generate_hash({ route:, distance: })
+      Success(generate_hash({ route:, distance: }))
     end
 
     def check_and_normalize_flight_number(flight_number)
@@ -66,7 +69,7 @@ module Handlers
     end
 
     def generate_hash(route_data)
-      Handlers::HashGenerator.new.call(route_data:)
+      yield Handlers::HashGenerator.new.call(route_data:)
     end
 
     def fetch_airports_data(airport_iata_code)

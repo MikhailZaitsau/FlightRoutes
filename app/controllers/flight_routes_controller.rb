@@ -8,7 +8,7 @@ class FlightRoutesController < ApplicationController
     if @input_data.present? && @input_data.is_a?(String)
       render json: fetch_flight_route_by_flight_number
     else
-      Handlers::ErrorMessageHandler.new.call('Flight number not received')
+      render json: Handlers::ErrorMessageHandler.new.call('Flight number not received')
     end
   end
 

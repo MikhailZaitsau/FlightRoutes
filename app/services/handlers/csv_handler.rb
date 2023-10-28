@@ -40,13 +40,18 @@ module Handlers
 
     def ready_data_for_output_file
       @flight_number_used_for_lookup = check_and_normalize_flight_number
-      @lookup_result = fetch_route_from_api_or_db
+      case fetch_route_from_api_or_db
+      in Success(route)
+        @lookup_result = route
+      in Failure(error)
+        @lookup_result = error
+      in nil
+        @lookup_result = nil
+      end
       @number_of_legs = check_number_of_legs
     end
 
     def check_and_normalize_flight_number
-      return nil unless @flight_number.is_a?(String)
-
       case Handlers::NumberNormalizer.new.call(@flight_number)
       in Success(number)
         number
@@ -56,7 +61,7 @@ module Handlers
     end
 
     def fetch_route_from_api_or_db
-      Handlers::RoutesFetcher.new.call(@flight_number_used_for_lookup) if @flight_number_used_for_lookup
+      Handlers::FlightNumberHandler.new.call(@flight_number) if @flight_number_used_for_lookup
     end
 
     def check_lookup_status
