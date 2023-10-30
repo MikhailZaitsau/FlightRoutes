@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://test.api.amadeus.com/v1/reference-data/locations?keyword=CDG&subType=AIRPORT
+    uri: https://api.amadeus.com/v1/reference-data/locations?keyword=CDG&subType=AIRPORT
     body:
       encoding: US-ASCII
       string: ''
@@ -15,17 +15,17 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sat, 28 Oct 2023 13:24:04 GMT
+      - Mon, 30 Oct 2023 16:19:15 GMT
       Content-Type:
       - application/vnd.amadeus+json
       Content-Length:
-      - '1146'
+      - '1136'
       Connection:
       - keep-alive
       Ama-Request-Id:
-      - 0001PFNTW38QK4
+      - 00013DOYA3CO03
       Ama-Gateway-Request-Id:
-      - rrt-0410e1c88463657c5-a-de-25248-15163139-1
+      - rrt-09c524ce623c608a3-a-de-26724-27532497-1
       Access-Control-Allow-Headers:
       - origin, x-requested-with, accept, Content-Type, Authorization
       Access-Control-Max-Age:
@@ -43,7 +43,7 @@ http_interactions:
             "meta": {
                 "count": 1,
                 "links": {
-                    "self": "https://test.api.amadeus.com/v1/reference-data/locations?subType=AIRPORT&keyword=CDG"
+                    "self": "https://api.amadeus.com/v1/reference-data/locations?subType=AIRPORT&keyword=CDG"
                 }
             },
             "data": [
@@ -54,12 +54,12 @@ http_interactions:
                     "detailedName": "PARIS/FR:CHARLES DE GAULLE",
                     "id": "ACDG",
                     "self": {
-                        "href": "https://test.api.amadeus.com/v1/reference-data/locations/ACDG",
+                        "href": "https://api.amadeus.com/v1/reference-data/locations/ACDG",
                         "methods": [
                             "GET"
                         ]
                     },
-                    "timeZoneOffset": "+02:00",
+                    "timeZoneOffset": "+01:00",
                     "iataCode": "CDG",
                     "geoCode": {
                         "latitude": 49.01278,
@@ -80,5 +80,5 @@ http_interactions:
                 }
             ]
         }
-  recorded_at: Sat, 28 Oct 2023 13:24:03 GMT
+  recorded_at: Mon, 30 Oct 2023 16:19:14 GMT
 recorded_with: VCR 6.2.0

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'httparty'
 module Authorization
   class HeaderToken < Core::Service
     def call
@@ -42,8 +41,9 @@ module Authorization
     end
 
     def auth_request
-      HTTParty.post(
-        'https://test.api.amadeus.com/v1/security/oauth2/token',
+      Http::AmadeusRequest.new.call(
+        method: 'POST',
+        url: '/v1/security/oauth2/token',
         headers: { 'Authorization' => @auth_header },
         body: { 'grant_type' => 'client_credentials' }
       )

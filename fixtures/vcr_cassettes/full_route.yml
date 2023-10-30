@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://test.api.amadeus.com/v2/schedule/flights?carrierCode=LH&flightNumber=2479&scheduledDepartureDate=2023-10-28
+    uri: https://api.amadeus.com/v2/schedule/flights?carrierCode=LH&flightNumber=2479&scheduledDepartureDate=2023-10-30
     body:
       encoding: US-ASCII
       string: ''
@@ -15,19 +15,19 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sat, 28 Oct 2023 13:33:38 GMT
+      - Mon, 30 Oct 2023 16:19:11 GMT
       Content-Type:
       - application/vnd.amadeus+json
       Content-Length:
-      - '1242'
+      - '1268'
       Connection:
       - keep-alive
       Ama-Internal-Message-Version:
       - '14.1'
       Ama-Request-Id:
-      - 0001PFRFN38R02
+      - 0001KBE513CNZZ
       Ama-Gateway-Request-Id:
-      - rrt-0199f43396dec0872-b-de-25075-14404283-1
+      - rrt-09c524ce623c608a3-a-de-26725-27532227-1
       Access-Control-Allow-Headers:
       - origin, x-requested-with, accept, Content-Type, Authorization
       Access-Control-Max-Age:
@@ -45,12 +45,12 @@ http_interactions:
           "meta" : {
             "count" : 1,
             "links" : {
-              "self" : "https://test.api.amadeus.com/v2/schedule/flights?carrierCode=LH&flightNumber=2479&scheduledDepartureDate=2023-10-28"
+              "self" : "https://api.amadeus.com/v2/schedule/flights?carrierCode=LH&flightNumber=2479&scheduledDepartureDate=2023-10-30"
             }
           },
           "data" : [ {
             "type" : "DatedFlight",
-            "scheduledDepartureDate" : "2023-10-28",
+            "scheduledDepartureDate" : "2023-10-30",
             "flightDesignator" : {
               "carrierCode" : "LH",
               "flightNumber" : 2479
@@ -58,45 +58,48 @@ http_interactions:
             "flightPoints" : [ {
               "iataCode" : "LHR",
               "departure" : {
+                "terminal" : {
+                  "code" : "2"
+                },
                 "timings" : [ {
                   "qualifier" : "STD",
-                  "value" : "2023-10-28T17:50+01:00"
+                  "value" : "2023-10-30T17:50Z"
                 } ]
               }
             }, {
               "iataCode" : "MUC",
               "arrival" : {
+                "terminal" : {
+                  "code" : "2"
+                },
+                "gate" : {
+                  "mainGate" : "H10"
+                },
                 "timings" : [ {
                   "qualifier" : "STA",
-                  "value" : "2023-10-28T20:40+02:00"
+                  "value" : "2023-10-30T20:40+01:00"
                 } ]
               }
             } ],
             "segments" : [ {
               "boardPointIataCode" : "LHR",
               "offPointIataCode" : "MUC",
-              "scheduledSegmentDuration" : "PT1H50M",
-              "partnership" : {
-                "operatingFlight" : {
-                  "carrierCode" : "AV",
-                  "flightNumber" : 6524
-                }
-              }
+              "scheduledSegmentDuration" : "PT1H50M"
             } ],
             "legs" : [ {
               "boardPointIataCode" : "LHR",
               "offPointIataCode" : "MUC",
               "aircraftEquipment" : {
-                "aircraftType" : "320"
+                "aircraftType" : "32N"
               },
               "scheduledLegDuration" : "PT1H50M"
             } ]
           } ]
         }
-  recorded_at: Sat, 28 Oct 2023 13:33:37 GMT
+  recorded_at: Mon, 30 Oct 2023 16:19:10 GMT
 - request:
     method: get
-    uri: https://test.api.amadeus.com/v1/reference-data/locations?keyword=LHR&subType=AIRPORT
+    uri: https://api.amadeus.com/v1/reference-data/locations?keyword=LHR&subType=AIRPORT
     body:
       encoding: US-ASCII
       string: ''
@@ -109,17 +112,17 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sat, 28 Oct 2023 13:33:38 GMT
+      - Mon, 30 Oct 2023 16:19:11 GMT
       Content-Type:
       - application/vnd.amadeus+json
       Content-Length:
-      - '1139'
+      - '1129'
       Connection:
       - keep-alive
       Ama-Request-Id:
-      - 0001PFRFR38R02
+      - 000141W873CNZZ
       Ama-Gateway-Request-Id:
-      - rrt-0199f43396dec0872-b-de-25074-14404354-1
+      - rrt-09c524ce623c608a3-a-de-26726-27532266-1
       Access-Control-Allow-Headers:
       - origin, x-requested-with, accept, Content-Type, Authorization
       Access-Control-Max-Age:
@@ -137,7 +140,7 @@ http_interactions:
             "meta": {
                 "count": 1,
                 "links": {
-                    "self": "https://test.api.amadeus.com/v1/reference-data/locations?subType=AIRPORT&keyword=LHR"
+                    "self": "https://api.amadeus.com/v1/reference-data/locations?subType=AIRPORT&keyword=LHR"
                 }
             },
             "data": [
@@ -148,12 +151,12 @@ http_interactions:
                     "detailedName": "LONDON/GB:HEATHROW",
                     "id": "ALHR",
                     "self": {
-                        "href": "https://test.api.amadeus.com/v1/reference-data/locations/ALHR",
+                        "href": "https://api.amadeus.com/v1/reference-data/locations/ALHR",
                         "methods": [
                             "GET"
                         ]
                     },
-                    "timeZoneOffset": "+01:00",
+                    "timeZoneOffset": "+00:00",
                     "iataCode": "LHR",
                     "geoCode": {
                         "latitude": 51.47750,
@@ -174,10 +177,10 @@ http_interactions:
                 }
             ]
         }
-  recorded_at: Sat, 28 Oct 2023 13:33:37 GMT
+  recorded_at: Mon, 30 Oct 2023 16:19:10 GMT
 - request:
     method: get
-    uri: https://test.api.amadeus.com/v1/reference-data/locations?keyword=MUC&subType=AIRPORT
+    uri: https://api.amadeus.com/v1/reference-data/locations?keyword=MUC&subType=AIRPORT
     body:
       encoding: US-ASCII
       string: ''
@@ -190,17 +193,17 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sat, 28 Oct 2023 13:33:38 GMT
+      - Mon, 30 Oct 2023 16:19:11 GMT
       Content-Type:
       - application/vnd.amadeus+json
       Content-Length:
-      - '1156'
+      - '3679'
       Connection:
       - keep-alive
       Ama-Request-Id:
-      - 000120PZQ38R02
+      - 00012ZW1N3CNZZ
       Ama-Gateway-Request-Id:
-      - rrt-0199f43396dec0872-b-de-25074-14404378-1
+      - rrt-09c524ce623c608a3-a-de-26725-27532280-1
       Access-Control-Allow-Headers:
       - origin, x-requested-with, accept, Content-Type, Authorization
       Access-Control-Max-Age:
@@ -216,9 +219,9 @@ http_interactions:
       string: |-
         {
             "meta": {
-                "count": 1,
+                "count": 4,
                 "links": {
-                    "self": "https://test.api.amadeus.com/v1/reference-data/locations?subType=AIRPORT&keyword=MUC"
+                    "self": "https://api.amadeus.com/v1/reference-data/locations?subType=AIRPORT&keyword=MUC"
                 }
             },
             "data": [
@@ -229,12 +232,12 @@ http_interactions:
                     "detailedName": "MUNICH/DE:MUNICH INTERNATIONAL",
                     "id": "AMUC",
                     "self": {
-                        "href": "https://test.api.amadeus.com/v1/reference-data/locations/AMUC",
+                        "href": "https://api.amadeus.com/v1/reference-data/locations/AMUC",
                         "methods": [
                             "GET"
                         ]
                     },
-                    "timeZoneOffset": "+02:00",
+                    "timeZoneOffset": "+01:00",
                     "iataCode": "MUC",
                     "geoCode": {
                         "latitude": 48.35389,
@@ -252,8 +255,89 @@ http_interactions:
                             "score": 27
                         }
                     }
+                },
+                {
+                    "type": "location",
+                    "subType": "AIRPORT",
+                    "name": "MUCUGE",
+                    "detailedName": "MUCUGE/BA/BR:MUCUGE",
+                    "id": "ACHD",
+                    "self": {
+                        "href": "https://api.amadeus.com/v1/reference-data/locations/ACHD",
+                        "methods": [
+                            "GET"
+                        ]
+                    },
+                    "timeZoneOffset": "-03:00",
+                    "iataCode": "CHD",
+                    "geoCode": {
+                        "latitude": -13.03194,
+                        "longitude": -41.44555
+                    },
+                    "address": {
+                        "cityName": "MUCUGE",
+                        "cityCode": "CHD",
+                        "countryName": "BRAZIL",
+                        "countryCode": "BR",
+                        "stateCode": "BA",
+                        "regionCode": "SAMER"
+                    }
+                },
+                {
+                    "type": "location",
+                    "subType": "AIRPORT",
+                    "name": "MUCCAN STATION",
+                    "detailedName": "MUCCAN STATION/WA/AU",
+                    "id": "AMUQ",
+                    "self": {
+                        "href": "https://api.amadeus.com/v1/reference-data/locations/AMUQ",
+                        "methods": [
+                            "GET"
+                        ]
+                    },
+                    "timeZoneOffset": "+08:00",
+                    "iataCode": "MUQ",
+                    "geoCode": {
+                        "latitude": -20.63000,
+                        "longitude": 120.00000
+                    },
+                    "address": {
+                        "cityName": "MUCCAN STATION",
+                        "cityCode": "MUQ",
+                        "countryName": "AUSTRALIA",
+                        "countryCode": "AU",
+                        "stateCode": "WA",
+                        "regionCode": "AUSTL"
+                    }
+                },
+                {
+                    "type": "location",
+                    "subType": "AIRPORT",
+                    "name": "MUCURI",
+                    "detailedName": "MUCURI/BA/BR",
+                    "id": "AMVS",
+                    "self": {
+                        "href": "https://api.amadeus.com/v1/reference-data/locations/AMVS",
+                        "methods": [
+                            "GET"
+                        ]
+                    },
+                    "timeZoneOffset": "-03:00",
+                    "iataCode": "MVS",
+                    "geoCode": {
+                        "latitude": -18.08000,
+                        "longitude": -39.57000
+                    },
+                    "address": {
+                        "cityName": "MUCURI",
+                        "cityCode": "MVS",
+                        "countryName": "BRAZIL",
+                        "countryCode": "BR",
+                        "stateCode": "BA",
+                        "regionCode": "SAMER"
+                    }
                 }
             ]
         }
-  recorded_at: Sat, 28 Oct 2023 13:33:37 GMT
+  recorded_at: Mon, 30 Oct 2023 16:19:10 GMT
 recorded_with: VCR 6.2.0

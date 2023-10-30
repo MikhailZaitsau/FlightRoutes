@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://test.api.amadeus.com/v1/reference-data/locations?keyword=LHR&subType=AIRPORT
+    uri: https://api.amadeus.com/v1/reference-data/locations?keyword=LHR&subType=AIRPORT
     body:
       encoding: US-ASCII
       string: ''
@@ -15,17 +15,17 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sat, 28 Oct 2023 13:24:09 GMT
+      - Mon, 30 Oct 2023 16:19:19 GMT
       Content-Type:
       - application/vnd.amadeus+json
       Content-Length:
-      - '1139'
+      - '1129'
       Connection:
       - keep-alive
       Ama-Request-Id:
-      - 000120JK738QK9
+      - 0001N7LI53CO07
       Ama-Gateway-Request-Id:
-      - rrt-0410e1c88463657c5-a-de-25247-15163730-1
+      - rrt-09c524ce623c608a3-a-de-26726-27532981-1
       Access-Control-Allow-Headers:
       - origin, x-requested-with, accept, Content-Type, Authorization
       Access-Control-Max-Age:
@@ -43,7 +43,7 @@ http_interactions:
             "meta": {
                 "count": 1,
                 "links": {
-                    "self": "https://test.api.amadeus.com/v1/reference-data/locations?subType=AIRPORT&keyword=LHR"
+                    "self": "https://api.amadeus.com/v1/reference-data/locations?subType=AIRPORT&keyword=LHR"
                 }
             },
             "data": [
@@ -54,12 +54,12 @@ http_interactions:
                     "detailedName": "LONDON/GB:HEATHROW",
                     "id": "ALHR",
                     "self": {
-                        "href": "https://test.api.amadeus.com/v1/reference-data/locations/ALHR",
+                        "href": "https://api.amadeus.com/v1/reference-data/locations/ALHR",
                         "methods": [
                             "GET"
                         ]
                     },
-                    "timeZoneOffset": "+01:00",
+                    "timeZoneOffset": "+00:00",
                     "iataCode": "LHR",
                     "geoCode": {
                         "latitude": 51.47750,
@@ -80,5 +80,5 @@ http_interactions:
                 }
             ]
         }
-  recorded_at: Sat, 28 Oct 2023 13:24:08 GMT
+  recorded_at: Mon, 30 Oct 2023 16:19:18 GMT
 recorded_with: VCR 6.2.0

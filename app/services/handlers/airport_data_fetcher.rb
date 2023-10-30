@@ -32,8 +32,9 @@ module Handlers
     end
 
     def airport_query
-      HTTParty.get(
-        'https://test.api.amadeus.com/v1/reference-data/locations',
+      Http::AmadeusRequest.new.call(
+        method: 'GET',
+        url: '/v1/reference-data/locations',
         headers: { 'Authorization' => @token_header },
         query: {
           subType: 'AIRPORT', keyword: @airport_iata_code

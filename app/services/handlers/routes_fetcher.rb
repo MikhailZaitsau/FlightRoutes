@@ -36,8 +36,9 @@ module Handlers
     end
 
     def route_query
-      HTTParty.get(
-        'https://test.api.amadeus.com/v2/schedule/flights',
+      Http::AmadeusRequest.new.call(
+        method: 'GET',
+        url: '/v2/schedule/flights',
         headers: { 'Authorization' => @token_header },
         query: {
           carrierCode: @carrier_code,

@@ -62,6 +62,8 @@ group :development, :test do
   gem 'rubocop', '~> 1.57', require: false
   gem 'rubocop-rails', '~> 2.22', require: false
   gem 'rubocop-rspec', '~> 2.25', require: false
+  gem 'vcr', '~> 6.2'
+  gem 'webmock', '~> 3.19'
 end
 
 group :development do
@@ -83,7 +85,3 @@ group :test do
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 5.0'
 end
-
-gem 'vcr', '~> 6.2'
-
-gem 'webmock', '~> 3.19'
