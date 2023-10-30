@@ -23,8 +23,9 @@ RSpec.describe Handlers::HashGenerator do
       let(:token) { Authorization::HeaderToken.new.call.success }
       let(:airport_response) do
         VCR.use_cassette('ariport_lhr') do
-          HTTParty.get(
-            'https://test.api.amadeus.com/v1/reference-data/locations',
+          Http::AmadeusRequest.new.call(
+            method: 'GET',
+            url: '/v1/reference-data/locations',
             headers: { 'Authorization' => token },
             query: {
               subType: 'AIRPORT', keyword: 'LHR'

@@ -10,6 +10,7 @@ require 'rspec/rails'
 require 'support/factory_bot'
 require 'httparty'
 require 'vcr'
+require 'webmock/rspec'
 
 VCR.configure do |config|
   config.cassette_library_dir = 'fixtures/vcr_cassettes'
@@ -17,6 +18,9 @@ VCR.configure do |config|
   config.default_cassette_options = {
     match_requests_on: [:method, VCR.request_matchers.uri_without_param(:scheduledDepartureDate)]
   }
+  config.ignore_request do |request|
+    request.uri == 'https://api.amadeus.com/v1/security/oauth2/token'
+  end
   config.ignore_request do |request|
     request.uri == 'https://test.api.amadeus.com/v1/security/oauth2/token'
   end
