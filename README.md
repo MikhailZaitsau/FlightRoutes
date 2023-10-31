@@ -13,7 +13,7 @@ For see tests result use `docker/rspec`. All rails commands launch trough `docke
 
 Used: Rails 7.1.1, Ruby 3.1.2, Docker 24.0.6
 
-## Update 0.02:
+## version 0.02:
 
 - authorization token now stored with Rails cach instead of database;
 - most of requests from specs now stored in special 'cassettes' with 'vcr' gem to avoid unnecessary request to API;
@@ -21,7 +21,12 @@ Used: Rails 7.1.1, Ruby 3.1.2, Docker 24.0.6
 - added flight_numbers.csv file as an example of results;
 - fixed a lot of various bags.
 
-## Update 0.03:
+## version 0.03:
 
 - added way to switch between test and production API;
 - updated flight_numbers.csv file with production API.
+
+## version 0.04:
+
+- fixed incorrect airport data returns issue;
+- added few retry to csv script for route not found case.
