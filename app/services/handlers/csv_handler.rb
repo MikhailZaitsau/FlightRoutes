@@ -40,14 +40,7 @@ module Handlers
 
     def ready_data_for_output_file
       @flight_number_used_for_lookup = check_and_normalize_flight_number
-      case fetch_route_from_api_or_db
-      in Success(route)
-        @lookup_result = route
-      in Failure(error)
-        @lookup_result = error
-      in nil
-        @lookup_result = nil
-      end
+      @lookup_result = @flight_number_used_for_lookup ? fetch_route_from_api_or_db : nil
       @number_of_legs = check_number_of_legs
     end
 
@@ -60,8 +53,14 @@ module Handlers
       end
     end
 
-    def fetch_route_from_api_or_db
-      Handlers::FlightNumberHandler.new.call(@flight_number) if @flight_number_used_for_lookup
+    def fetch_route_from_api_or_db(retry_counter = 0)
+      case Handlers::FlightNumberHandler.new.call(@flight_number)
+      in Success(route)
+        route
+      in Failure(error)
+        retry_counter += 1
+        retry_counter > 2 ? error : fetch_route_from_api_or_db(retry_counter)
+      end
     end
 
     def check_lookup_status
