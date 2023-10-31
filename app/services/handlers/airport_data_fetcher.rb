@@ -43,7 +43,7 @@ module Handlers
     end
 
     def airport_data
-      @airport_data ||= JSON.parse(@airport_response)['data'][0]
+      JSON.parse(@airport_response)['data'].find { |airport| airport['iataCode'] == @airport_iata_code }
     end
 
     def generate_hash

@@ -22,5 +22,15 @@ RSpec.describe Handlers::AirportDataFetcher do
         expect(airport_data.failure).to eq(error)
       end
     end
+
+    context 'when found multiple airports' do
+      let(:airport_iata_code) { 'DUB' }
+      let(:dub) { { iata: 'DUB', city: 'DUBLIN', country: 'IRELAND', latitude: 53.42139, longitude: -6.27 } }
+
+      it 'return the correct airport data' do
+        airport_data = VCR.use_cassette('ariport_dub') { described_class.new.call(airport_iata_code, token) }
+        expect(airport_data.success).to eq(dub)
+      end
+    end
   end
 end
